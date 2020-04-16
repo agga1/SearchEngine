@@ -1,0 +1,8 @@
+asgiref==3.2.7
+Django==3.0.5
+nltk==3.4.5
+numpy==1.18.2
+pytz==2019.3
+scipy==1.4.1
+six==1.14.0
+sqlparse==0.3.1
