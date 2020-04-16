@@ -3,7 +3,6 @@ from nltk import PorterStemmer
 from SearchEngine.backend.preprocessing.stopwords import stopwords
 from numpy import linalg as LA
 import string
-from multiprocessing import Pool
 
 class Text:
     def __init__(self, text: str):

@@ -1,5 +1,9 @@
-# simple wiki dump converted to plain text provided by:
-# https://github.com/LGDoor/Dump-of-Simple-English-Wiki
+"""
+Archived file, used only when database is empty to populate the database
+with articles from simple wiki provided in one file by:
+ https://github.com/LGDoor/Dump-of-Simple-English-Wiki
+"""
+
 import os
 import concurrent.futures
 from SearchEngine.backend.classes.Article import Article
@@ -51,7 +55,6 @@ def articles_from_files(files_dir: str, max_count=1000) -> List[Article]:
     article_paths = article_paths[:max_count]
     with concurrent.futures.ThreadPoolExecutor(max_workers=8) as executor:
         articles = list(executor.map(file_to_article, article_paths))
-    # os.rmdir(files_dir) TODO rm articles?
     return articles
 
 
@@ -72,18 +75,6 @@ def file_to_article(article_path: str) -> Article:
     article.id = dbArticle.objects.get(title=title).id
     print(f"id of article {article} is {article.id}")
     return article
-
-def articles_from_dbArticles(art_count=1000) -> list:
-    print("from db")
-    from search.models import Article as dbArticle
-    articles = []
-    cnt = 0
-    for art in dbArticle.objects.all():
-        articles.append(Article(title=art.title, text=art.content, id=art.id))
-        cnt+=1
-        if art_count <=cnt:
-            break
-    return articles
 
 
 

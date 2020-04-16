@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 # Create your views here.
 
-from SearchEngine.backend.preprocessing.preprocess import init_search
+from SearchEngine.backend.preprocessing.index_files import index_files
 from search.models import Article
 
 searchStruct = None
@@ -17,9 +17,9 @@ def start(request):
     global searchStruct
     if request.method == 'GET':
         N = int(request.GET['articles_nr'])
-        searchStruct = init_search(N)
+        searchStruct = index_files(N)
     if searchStruct is None:
-        searchStruct = init_search(1000) # deafult structure with 1000 articles
+        searchStruct = index_files(1000) # deafult structure with 1000 articles
     return render(request, 'search/start.html', {})
 
 def detail(request, article_id):
