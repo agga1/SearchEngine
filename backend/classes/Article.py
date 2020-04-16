@@ -1,4 +1,4 @@
-from SearchEngine.backend.classes.Text import Text
+from backend.classes.Text import Text
 
 class Article:
     """

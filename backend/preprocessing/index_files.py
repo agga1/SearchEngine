@@ -1,8 +1,8 @@
 from time import perf_counter
 import concurrent.futures
 
-from SearchEngine.backend.classes.Article import Article
-from SearchEngine.backend.classes.SearchStruct import SearchStruct
+from backend.classes.Article import Article
+from backend.classes.SearchStruct import SearchStruct
 
 
 def index_files(art_count=1000) -> SearchStruct:

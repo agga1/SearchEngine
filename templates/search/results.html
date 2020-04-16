@@ -4,9 +4,8 @@
 {% block content %}
 <h3>Results for query: {{ query}}</h3>
     <ul>
-{#    <a href="{% url 'search:detail' answer.link %}"></a>#}
     {% for article, correlation in answers %}
-        <li><a href="{% url 'search:detail' article.id %}">{{article.title}}</a></li>
+        <li><a href="{% url 'search:detail' article.id %}">{{article.title}}</a> correlation: {{ correlation }}</li>
     {% endfor %}
     </ul>
 {% endblock %}

@@ -1,10 +1,15 @@
 {% extends 'base.html' %}
 
-{% block title %}Search Query{% endblock %}
+{% block title %}Search Engine{% endblock %}
 
 {% block content %}
+    <div>
+    Hello! This is a simple search engine implementation. <br/>
+    Currently the database with 2200 articles is provided.<br/>
+    Please provide number of articles to index (indexing 1000 articles should take about 4-6 seconds).</div>
+    <br/>
         <form action="{% url 'search:start'%}" method="get">
-          <label for="quantity">How many articles (currently 2200 articles in db):</label>
+          <label for="quantity">How many articles to index:</label>
         <input type="number" id="articles_nr" name="articles_nr" min="1" max="2200"><br>
         <input type="submit" value="index files">
     </form>

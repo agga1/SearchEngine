@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 # Create your views here.
 
-from SearchEngine.backend.preprocessing.index_files import index_files
+from backend.preprocessing.index_files import index_files
 from search.models import Article
 
 searchStruct = None

@@ -1,6 +1,6 @@
 import numpy as np
 from nltk import PorterStemmer
-from SearchEngine.backend.preprocessing.stopwords import stopwords
+from backend.preprocessing.stopwords import stopwords
 from numpy import linalg as LA
 import string
 

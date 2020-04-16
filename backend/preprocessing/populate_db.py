@@ -6,7 +6,7 @@ with articles from simple wiki provided in one file by:
 
 import os
 import concurrent.futures
-from SearchEngine.backend.classes.Article import Article
+from backend.classes.Article import Article
 from typing import List
 
 # chars forbidden in windows filenames (added () for clarity )

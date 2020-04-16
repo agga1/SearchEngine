@@ -1,12 +1,11 @@
-from time import perf_counter
 from scipy.sparse import lil_matrix
 from scipy.sparse.linalg import svds
 import numpy as np
 from numpy import linalg as LA
 
 from typing import List
-from SearchEngine.backend.classes.Article import Article
-from SearchEngine.backend.classes.Text import Text
+from backend.classes.Article import Article
+from backend.classes.Text import Text
 
 
 class SearchStruct:

@@ -3,9 +3,12 @@
 {% block title %}Search Query{% endblock %}
 
 {% block content %}
-    <h3>Files successfully indexed!</h3>
+    <div>Last chosen number of files is indexed. <br/>
+        If you want to reindex files, bo back to /search page. <br/>
+        Please take note that search can take a little longer when using svd option for the first time. </div>
+    <br/>
     <form action="{% url 'search:find'%}" method="get">
-          <label for="query">search for:</label><br>
+          <label for="query">phrase to search for:</label>
         <input type="text" name="query" id="query"><br>
         <input type="radio" id="svd" name="svd_opt" value="yes">
           <label for="svd">use SVD</label>
