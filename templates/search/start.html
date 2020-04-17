@@ -3,19 +3,36 @@
 {% block title %}Search Query{% endblock %}
 
 {% block content %}
-    <div>Last chosen number of files is indexed. <br/>
-        If you want to reindex files, bo back to /search page. <br/>
-        Please take note that search can take a little longer when using svd option for the first time. </div>
-    <br/>
-    <form action="{% url 'search:find'%}" method="get">
-          <label for="query">phrase to search for:</label>
-        <input type="text" name="query" id="query"><br>
-        <input type="radio" id="svd" name="svd_opt" value="yes">
-          <label for="svd">use SVD</label>
-        <input type="radio" id="no_svd" name="svd_opt" value="no">
-          <label for="no_svd">no SVD</label><br>
-          <label for="quantity">Get top n matching:</label>
-        <input type="number" id="quantity" name="quantity" min="1"><br>
-        <input type="submit" value="Search">
-    </form>
+    <div class="w3-container" >
+    <div class="w3-panel w3-pale-green w3-leftbar w3-border-green w3-text-grey" style="max-width: 500px">
+        <p>
+        Last chosen number of files is indexed. <br/>
+        If you want to reindex files, bo back to home page. <br/>
+        Please take note that search can take a little longer when using svd option for the first time.
+        </p>
+    </div>
+    <div class="w3-cell-row" style="max-width:400px; margin: auto">
+    <div class="w3-card-2 " >
+        <div class="w3-container w3-green">
+            <h2>Search</h2>
+        </div>
+        <form class="w3-container" action="{% url 'search:find'%}" method="get">
+            <p>
+              <label for="query" class="w3-text-grey"><b>Phrase:</b></label>
+            <input class="w3-input w3-border" type="text" name="query" id="query">
+            </p><p>
+            <input type="radio" id="svd" name="svd_opt" value="yes">
+              <label for="svd">use SVD</label>
+            </p><p>
+            <input type="radio" id="no_svd" name="svd_opt" value="no">
+              <label for="no_svd">no SVD</label>
+            </p>
+            <p>
+            <label for="quantity" class="w3-text-grey"><b>Get top n matches:</b></label>
+            <input class="w3-input w3-border" type="number" id="quantity" name="quantity" min="1">
+            </p><p>
+            <input class="w3-button w3-green" type="submit" value="Search"></p>
+        </form>
+    </div>
+    </div>
 {% endblock %}

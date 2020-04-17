@@ -51,7 +51,7 @@ class SearchStruct:
             self.matrix[i] *= IDF[i]
 
     def normalize(self, matrix):
-        return matrix / LA.norm(self.matrix, axis=0)
+        return matrix / LA.norm(matrix, axis=0)
 
     def search(self, query_text: str, top_k=1, lra_k=None):
         query = Text(query_text)
@@ -63,7 +63,7 @@ class SearchStruct:
             if lra_k not in self.noiseless_matrixes.keys():
                 if len(self.noiseless_matrixes) > 5:
                     self.noiseless_matrixes = {}
-                self.noiseless_matrixes[lra_k] = self.remove_noise(lra_k)
+                self.noiseless_matrixes[lra_k] = self.normalize(self.remove_noise(lra_k))
             mx = self.noiseless_matrixes[lra_k]
         products = np.zeros(mx.shape[1])
         for c in range(mx.shape[1]):

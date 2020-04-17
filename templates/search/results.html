@@ -2,10 +2,17 @@
 
 {% block title %}results{% endblock %}
 {% block content %}
-<h3>Results for query: {{ query}}</h3>
-    <ul>
-    {% for article, correlation in answers %}
-        <li><a href="{% url 'search:detail' article.id %}">{{article.title}}</a> correlation: {{ correlation }}</li>
-    {% endfor %}
-    </ul>
+    <div class="w3-container">
+        <h2>Results for query: {{ query}}</h2>
+    </div>
+    <br/><br/>
+    <div class="w3-container ">
+        <ul class="w3-ul w3-border" style="width:40%; margin: auto">
+        {% for article, correlation in answers %}
+            <li class="w3-hover-green"><a href="{% url 'search:detail' article.id %}" style="text-decoration: none">
+                <b style="font-size: 20px">{{article.title}} </b> correlation: {{ correlation|floatformat:3 }} </a>
+            </li>
+        {% endfor %}
+        </ul>
+    </div>
 {% endblock %}

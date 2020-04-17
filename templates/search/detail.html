@@ -2,7 +2,10 @@
 {% block title %}{{ article.title }}{% endblock %}
 {% block content %}
 
-<h1>{{ article.title }}</h1>
-<div>{{ article.content }}</div>
+
+<div class="w3-container" style="max-width: 75%">
+    <h1>{{ article.title }}</h1>
+    {{ article.content }}
+</div>
 
 {% endblock %}

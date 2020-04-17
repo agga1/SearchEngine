@@ -3,15 +3,27 @@
 {% block title %}Search Engine{% endblock %}
 
 {% block content %}
-    <div>
-    Hello! This is a simple search engine implementation. <br/>
-    Currently the database with 2200 articles is provided.<br/>
-    Please provide number of articles to index (indexing 1000 articles should take about 4-6 seconds).</div>
-    <br/>
-        <form action="{% url 'search:start'%}" method="get">
-          <label for="quantity">How many articles to index:</label>
-        <input type="number" id="articles_nr" name="articles_nr" min="1" max="2200"><br>
-        <input type="submit" value="index files">
+    <div class="w3-container w3-center w3-text-green" >
+    <h1 style="font-size:128px;">Search Engine</h1>
+    </div>
+    <div class="w3-container" >
+        <div class="w3-panel w3-pale-green w3-leftbar w3-border-green w3-text-grey" style="max-width: 500px">
+        <p>
+        Currently the database with 2200 articles is provided.<br/>
+        Indexing 1000 articles should take about 4-6 seconds.
+        </p>
+        </div>
+    </div>
+    <div class="w3-display-middle">
+    <div class="w3-card-2 w3-center" style="max-width:300px">
+        <form class="w3-container w3-center" action="{% url 'search:start'%}" method="get">
+            <p>
+                <label for="articles_nr">How many articles to index:</label></p>
+                <input class="w3-input" type="number" id="articles_nr" name="articles_nr" min="1" max="2200"><br>
+            <p>
+                <input class="w3-button w3-green" type="submit" value="index files"></p>
     </form>
-</a>
+    </div>
+    </div>
+
 {% endblock %}
