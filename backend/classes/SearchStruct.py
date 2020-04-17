@@ -3,7 +3,7 @@ from scipy.sparse.linalg import svds
 import numpy as np
 from numpy import linalg as LA
 
-from typing import List
+from typing import List, Tuple
 from backend.classes.Article import Article
 from backend.classes.Text import Text
 
@@ -38,6 +38,7 @@ class SearchStruct:
         return dictionary
 
     def texts_to_matrix(self):
+        """ joins all BOWs into a single matrix """
         BOWs = []
         for article in self.articles:
             BOWs.append(article.text.convert_to_BOW(self.dictionary))
@@ -53,27 +54,37 @@ class SearchStruct:
     def normalize(self, matrix):
         return matrix / LA.norm(matrix, axis=0)
 
-    def search(self, query_text: str, top_k=1, lra_k=None):
+    def search(self, query_text: str, top_k=1, lra_k=None) -> List[Tuple[Article, float]]:
+        """
+        finds @top_k matches for given @query_text
+        :param lra_k: if set, uses SVD and low rank approximation by @lra_k eigenvalues
+        :return: list of tuples: (Article, correlation)
+        """
         query = Text(query_text)
         query.convert_to_BOW(self.dictionary)
         query.normalize_BOW()
+
         if lra_k is None:
             mx = self.matrix
         else:
-            if lra_k not in self.noiseless_matrixes.keys():
-                if len(self.noiseless_matrixes) > 5:
+            if lra_k not in self.noiseless_matrixes.keys():  # try to find cached matrix
+                if len(self.noiseless_matrixes) > 5:  # clear cache
                     self.noiseless_matrixes = {}
                 self.noiseless_matrixes[lra_k] = self.normalize(self.remove_noise(lra_k))
             mx = self.noiseless_matrixes[lra_k]
-        products = np.zeros(mx.shape[1])
+
+        products = np.zeros(mx.shape[1])  # dot product used as probability measure
         for c in range(mx.shape[1]):
             products[c] = np.dot(mx[:, c], query.BOW)
+
         best_articles_at = np.argpartition(products, -top_k)[-top_k:]
         results = [(self.articles[idx], products[idx]) for idx in best_articles_at]
         results = sorted(results, key=lambda res: res[1], reverse=True)
-        print(f"searched phrase : {query_text}")
+
+        print(f"searched phrase : {query_text}") # additional console print
         for res in results:
             print(f"{res[0]}\n correlation: {res[1]}")
+
         return results
 
     def remove_noise(self, k=10):
@@ -88,5 +99,5 @@ class SearchStruct:
         return lrapp
 
     def __str__(self):
-        return f"SearchStruct with {len(self.articles)} articles"
+        return f"SearchStruct with {len(self.articles)} indexed articles"
 
